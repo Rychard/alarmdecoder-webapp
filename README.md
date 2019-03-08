@@ -35,11 +35,11 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   sudo touch /boot/ssh
   sudo rm /etc/ssh/ssh_host_*; dpkg-reconfigure openssh-server # !!Change keys!!
   ```
-* Set default user password to 'raspberry' (user configuration)
+* Set default user password to `raspberry` (user configuration)
   ```bash
   passwd
   ```
-* Modify config.txt to enable the GPIO UART and force cpu to turbo tested on Pi3, PiB, Pi3B+ and PiZero
+* Modify `/boot/config.txt` to enable the GPIO UART and force cpu to turbo tested on Pi3, PiB, Pi3B+ and PiZero
   ```bash
   sudo sed -i '/enable_uart\|pi3-miniuart-bt-overlay\|force_turbo/d' /boot/config.txt
   ```
@@ -47,7 +47,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   ```bash
   sudo raspi-config nonint do_serial 1
   ```
-* Set hostname to AlarmDecoder
+* Set hostname to `AlarmDecoder`
   ```bash
   sudo hostname AlarmDecoder
   ```
