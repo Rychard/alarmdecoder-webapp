@@ -55,7 +55,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   ```bash
   sudo raspi-config nonint do_wifi_country US
   ```
-* Set TZ (user option) (user option)
+* Set TZ (user option)
   ```bash
   sudo raspi-config nonint do_change_timezone America/Los_Angeles
   ```
