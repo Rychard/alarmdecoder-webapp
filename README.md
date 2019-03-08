@@ -106,12 +106,12 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   ```
 * Add Python requirements to the entire system as root
   ```bash
-  sudo cd /opt/alarmdecoder-webapp/ && pip install -r requirements.txt
+  cd /opt/alarmdecoder-webapp/ && pip install -r requirements.txt
   ```
 * Add ser2sock
   ```bash
-  sudo cd /opt/ && git clone https://github.com/nutechsoftware/ser2sock.git
-  sudo cd /opt/ser2sock/ && ./configure && make && cp ./ser2sock /usr/local/bin/
+  cd /opt/ && git clone https://github.com/nutechsoftware/ser2sock.git
+  cd /opt/ser2sock/ && ./configure && make && cp ./ser2sock /usr/local/bin/
   ```
 * Allow pi user to have r/w access to serial ports and a few key files for the WEB services to udpate by adding them to the same group and adding +w on that group
   ```bash
