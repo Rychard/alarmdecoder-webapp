@@ -94,7 +94,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   ```
 * Create needed directories and set permissions for updates
   ```bash
-  sudo mkdir -p /opt/alarmdecoder2 /opt/alarmdecoder-webapp2 && chown pi:pi /opt/alarmdecoder /opt/alarmdecoder-webapp
+  sudo mkdir -p /opt/alarmdecoder2 /opt/alarmdecoder-webapp2 && sudo chown pi:pi /opt/alarmdecoder /opt/alarmdecoder-webapp
   ```
 * Grab the latest master branch of the AlarmDecoder Python API
   ```bash
