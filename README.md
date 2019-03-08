@@ -119,8 +119,8 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   > Depending on the package, you may have to run the command using `sudo` as well.
 * Add ser2sock
   ```bash
-  cd /opt/ && git clone https://github.com/nutechsoftware/ser2sock.git
-  cd /opt/ser2sock/ && ./configure && make && cp ./ser2sock /usr/local/bin/
+  cd /opt/ && sudo git clone https://github.com/nutechsoftware/ser2sock.git
+  cd /opt/ser2sock/ && sudo ./configure && sudo make && sudo cp ./ser2sock /usr/local/bin/
   ```
 * Allow pi user to have r/w access to serial ports and a few key files for the WEB services to udpate by adding them to the same group and adding +w on that group
   ```bash
@@ -130,7 +130,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   ```
 * Create a ser2sock config folder owned by pi in etc and add config and update it
   ```bash
-  sudo mkdir -p /etc/ser2sock && cp /opt/ser2sock/etc/ser2sock/ser2sock.conf /etc/ser2sock/ && && chown -R pi:pi /etc/ser2sock
+  sudo mkdir -p /etc/ser2sock && sudo cp /opt/ser2sock/etc/ser2sock/ser2sock.conf /etc/ser2sock/ && sudo chown -R pi:pi /etc/ser2sock
   sed -i 's/raw_device_mode = 0/raw_device_mode = 1/g' /etc/ser2sock/ser2sock.conf
   sed -i 's/device = \/dev\/ttyAMA0/device = \/dev\/serial0/g' /etc/ser2sock/ser2sock.conf
   ```
