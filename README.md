@@ -108,6 +108,15 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   ```bash
   cd /opt/alarmdecoder-webapp/ && pip install -r requirements.txt
   ```
+  > If you get an error like this:
+  > ```text
+  > Cannot uninstall 'pyserial'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
+  > ```
+  > You must add the `--ignore-installed <package-name>` argument to `pip install`, as shown below:
+  > ```bash
+  > pip install -r requirements.txt --ignore-installed pyserial
+  > ```
+  > Depending on the package, you may have to run the command using `sudo` as well.
 * Add ser2sock
   ```bash
   cd /opt/ && git clone https://github.com/nutechsoftware/ser2sock.git
