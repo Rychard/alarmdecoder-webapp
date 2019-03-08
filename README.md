@@ -258,7 +258,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
 - Init the AD2Web database as pi user
 
   ```bash
-  cd /opt/alarmdecoder-webapp/ && python manage.py initdbs
+  cd /opt/alarmdecoder-webapp/ && sudo python manage.py initdb
   ```
 
 ## Support
