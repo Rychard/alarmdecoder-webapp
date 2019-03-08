@@ -42,8 +42,8 @@ passwd
 * Modify config.txt to enable the GPIO UART and force cpu to turbo tested on Pi3, PiB, Pi3B+ and PiZero
 ```
 sudo sed -i '/enable_uart\|pi3-miniuart-bt-overlay\|force_turbo/d' /boot/config.txt
-```  
-* Disable serial console so the kernel does not try to talk to the AD2Pi on the GPIO header  
+```
+* Disable serial console so the kernel does not try to talk to the AD2Pi on the GPIO header
 ```
 sudo raspi-config nonint do_serial 1
 ```
@@ -58,7 +58,7 @@ sudo raspi-config nonint do_wifi_country US
 * Set TZ (user option) (user option)
 ```
 sudo raspi-config nonint do_change_timezone America/Los_Angeles
-``` 
+```
 * Set the Keyboard layout and language (user option)
 ```
 sudo raspi-config nonint do_configure_keyboard US pc101
@@ -95,7 +95,7 @@ sudo pip uninstall python-cryptography && pip install python-cryptography
 * Create needed directories and set permissions for updates
 ```
 sudo mkdir -p /opt/alarmdecoder2 /opt/alarmdecoder-webapp2 && chown pi:pi /opt/alarmdecoder /opt/alarmdecoder-webapp
-``` 
+```
 * Grab the latest master branch of the AlarmDecoder Python API
 ```
 cd /opt && git clone https://github.com/nutechsoftware/alarmdecoder.git
@@ -131,7 +131,7 @@ sudo cp /opt/ser2sock/init/ser2sock /etc/init.d/
 sudo sed -i 's/EXTRA_START_ARGS=/#EXTRA_START_ARGS=/g' /etc/init.d/ser2sock
 sudo sed -i 's/#RUN_AS=.*/RUN_AS=pi:pi/g' /etc/init.d/ser2sock
 sudo update-rc.d ser2sock defaults
-```  
+```
 * Enable the avahi service
 ```
 sudo echo -e '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE service-group SYSTEM "avahi-service.dtd">\n<service-group>\n\t<name replace-wildcards="yes">%h</name>\n\t<service>\n\t\t<type>_device-info._tcp</type>\n\t\t<port>0</port>\n\t\t<txt-record>model=AlarmDecoder</txt-record>\n\t</service>\n\t<service>\n\t\t<type>_ssh._tcp</type>\n\t\t<port>22</port>\n\t</service>\n</service-group>' > /etc/avahi/services/alarmdecoder.service
