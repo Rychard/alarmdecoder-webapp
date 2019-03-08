@@ -31,56 +31,56 @@ If you're running on a Raspberry Pi the easiest way to get started is to downloa
 If you would rather do it by hand you can follow these steps using a Raspbian 9 base image:
 You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. This presumes you will be the pi user with a monitor and keyboard attached to the Pi. Optionally you can connect over the network after enabling ssh and WiFi. See also [Headless wifi setup](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md)
 
-* Enable SSH at boot (optional)
+- Enable SSH at boot (optional)
 
   ```bash
   sudo touch /boot/ssh
   sudo rm /etc/ssh/ssh_host_*; dpkg-reconfigure openssh-server # !!Change keys!!
   ```
 
-* Set default user password to `raspberry` (user configuration)
+- Set default user password to `raspberry` (user configuration)
 
   ```bash
   passwd
   ```
 
-* Modify `/boot/config.txt` to enable the GPIO UART and force cpu to turbo tested on Pi3, PiB, Pi3B+ and PiZero
+- Modify `/boot/config.txt` to enable the GPIO UART and force cpu to turbo tested on Pi3, PiB, Pi3B+ and PiZero
 
   ```bash
   sudo sed -i '/enable_uart\|pi3-miniuart-bt-overlay\|force_turbo/d' /boot/config.txt
   ```
 
-* Disable serial console so the kernel does not try to talk to the AD2Pi on the GPIO header
+- Disable serial console so the kernel does not try to talk to the AD2Pi on the GPIO header
 
   ```bash
   sudo raspi-config nonint do_serial 1
   ```
 
-* Set hostname to `AlarmDecoder`
+- Set hostname to `AlarmDecoder`
 
   ```bash
   sudo hostname AlarmDecoder
   ```
 
-* Set country code for WIFI (user option)
+- Set country code for WIFI (user option)
 
   ```bash
   sudo raspi-config nonint do_wifi_country US
   ```
 
-* Set TZ (user option)
+- Set TZ (user option)
 
   ```bash
   sudo raspi-config nonint do_change_timezone America/Los_Angeles
   ```
 
-* Set the Keyboard layout and language (user option)
+- Set the Keyboard layout and language (user option)
 
   ```bash
   sudo raspi-config nonint do_configure_keyboard US pc101
   ```
 
-* Setup WiFi (optional) see also [Headless wifi setup](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md)
+- Setup WiFi (optional) see also [Headless wifi setup](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md)
 
   ```bash
   sudo echo -E '
@@ -91,55 +91,55 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   }' >> /etc/wpa_supplicant/wpa_supplicant.conf
   ```
 
-* Resize the file system and reboot
+- Resize the file system and reboot
 
   ```bash
   sudo raspi-config nonint do_expand_rootfs
   ```
 
-* Update repositories.
+- Update repositories.
 
   ```bash
   sudo apt-get update
   ```
 
-* Install packages
+- Install packages
 
   ```bash
   sudo apt-get install build-essential autoconf automake cmake cmake-data cmake libffi-dev libssl-dev libpcre3-dev libssl-dev libpcre++-dev zlib1g-dev libcurl4-openssl-dev python2.7-dev python-dev sqlite3 screen sendmail minicom telnet vim nginx gunicorn git python-pip miniupnpc python-virtualenv python-opencv python-httplib2
   ```
 
-* Update pip setuptools
+- Update pip setuptools
 
   ```bash
   sudo pip install --upgrade setuptools
   ```
 
-* Remove old version 1.7.1 of python-cryptography and install a new version using pip.
+- Remove old version 1.7.1 of python-cryptography and install a new version using pip.
 
   ```bash
   sudo pip uninstall python-cryptography && pip install python-cryptography
   ```
 
-* Create needed directories and set permissions for updates
+- Create needed directories and set permissions for updates
 
   ```bash
   sudo mkdir -p /opt/alarmdecoder2 /opt/alarmdecoder-webapp2 && sudo chown pi:pi /opt/alarmdecoder /opt/alarmdecoder-webapp
   ```
 
-* Grab the latest master branch of the AlarmDecoder Python API
+- Grab the latest master branch of the AlarmDecoder Python API
 
   ```bash
   cd /opt && sudo git clone https://github.com/nutechsoftware/alarmdecoder.git
   ```
 
-* Grab the latest master branch of the AlarmDecoder web services app
+- Grab the latest master branch of the AlarmDecoder web services app
 
   ```bash
   cd /opt && sudo git clone https://github.com/nutechsoftware/alarmdecoder-webapp.git
   ```
 
-* Add Python requirements to the entire system as root
+- Add Python requirements to the entire system as root
 
   ```bash
   cd /opt/alarmdecoder-webapp/ && pip install -r requirements.txt
@@ -158,14 +158,14 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   > ```
   >
   > Depending on the package, you may have to run the command using `sudo` as well.
-* Add ser2sock
+- Add ser2sock
 
   ```bash
   cd /opt/ && sudo git clone https://github.com/nutechsoftware/ser2sock.git
   cd /opt/ser2sock/ && sudo ./configure && sudo make && sudo cp ./ser2sock /usr/local/bin/
   ```
 
-* Allow pi user to have r/w access to serial ports and a few key files for the WEB services to udpate by adding them to the same group and adding +w on that group
+- Allow pi user to have r/w access to serial ports and a few key files for the WEB services to udpate by adding them to the same group and adding +w on that group
 
   ```bash
   sudo usermod -a -G dialout pi
@@ -173,7 +173,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   sudo chmod g+w /etc/hosts /etc/hostname
   ```
 
-* Create a ser2sock config folder owned by pi in etc and add config and update it
+- Create a ser2sock config folder owned by pi in etc and add config and update it
 
   ```bash
   sudo mkdir -p /etc/ser2sock && sudo cp /opt/ser2sock/etc/ser2sock/ser2sock.conf /etc/ser2sock/ && sudo chown -R pi:pi /etc/ser2sock
@@ -181,7 +181,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   sed -i 's/device = \/dev\/ttyAMA0/device = \/dev\/serial0/g' /etc/ser2sock/ser2sock.conf
   ```
 
-* Set ser2sock to start at boot as user pi
+- Set ser2sock to start at boot as user pi
 
   ```bash
   sudo cp /opt/ser2sock/init/ser2sock /etc/init.d/
@@ -190,64 +190,64 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   sudo update-rc.d ser2sock defaults
   ```
 
-* Enable the avahi service
+- Enable the avahi service
 
   ```bash
   sudo echo -e '<?xml version="1.0" standalone="no"?>\n<!DOCTYPE service-group SYSTEM "avahi-service.dtd">\n<service-group>\n\t<name replace-wildcards="yes">%h</name>\n\t<service>\n\t\t<type>_device-info._tcp</type>\n\t\t<port>0</port>\n\t\t<txt-record>model=AlarmDecoder</txt-record>\n\t</service>\n\t<service>\n\t\t<type>_ssh._tcp</type>\n\t\t<port>22</port>\n\t</service>\n</service-group>' > /etc/avahi/services/alarmdecoder.service
   ```
 
-* Create nginx ssl folder
+- Create nginx ssl folder
 
   ```bash
   sudo mkdir -p /etc/nginx/ssl
   ```
 
-* Remove all default web content
+- Remove all default web content
 
   ```bash
   sudo rm -r /var/www/html/
   ```
 
-* Enable gunicorn service and tuning for Alarmdecoder webapp
+- Enable gunicorn service and tuning for Alarmdecoder webapp
 
   ```bash
   sudo echo -e '[Unit]\nDescription=gunicorn daemon\nAfter=network.target\n\n[Service]\nPIDFile=/run/gunicorn/pid\nUser=pi\nGroup=dialout\nWorkingDirectory=/opt/alarmdecoder-webapp\nExecStart=/usr/bin/gunicorn --worker-class=socketio.sgunicorn.GeventSocketIOWorker --timeout=120 --env=POLICY_SERVER=0 --log-level=debug wsgi:application\nExecReload=/bin/kill -s HUP $MAINPID\nExecStop=/bin/kill -s TERM $MAINPID\nPrivateTmp=true\n\n[Install]\nWantedBy=multi-user.target\n' > /etc/systemd/user/gunicorn.service
   ```
 
-* Enable gunicorn server and set to start at boot
+- Enable gunicorn server and set to start at boot
 
   ```bash
   sudo ln -s /etc/systemd/user/gunicorn.service /etc/systemd/system/multi-user.target.wants/gunicorn.service
   sudo ln -s /etc/systemd/user/gunicorn.service /etc/systemd/system/gunicorn.service
   ```
 
-* Enable log rotate for webapp and gunicorn
+- Enable log rotate for webapp and gunicorn
 
   ```bash
   sudo echo -e '/opt/alarmdecoder-webapp/instance/logs/*.log {\nweekly\nmissingok\nrotate 5\ncompress\ndelaycompress\nnotifempty\ncreate 0640 pi pi\nsharedscripts\n\ }' > /etc/logrotate.d/alarmdecoder
   sudo echo -e '/var/log/gunicorn/*.log {\nweekly\nmissingok\nrotate 5\ncompress\ndelaycompress\nnotifempty\ncreate 0640 www-data www-data\nsharedscripts\npostrotate\n[ -s /run/gunicorn/alarmdecoder.pid ] && kill -USR1 `cat /run/gunicorn/alarmdecoder.pid`\nendscript\n}' > /etc/logrotate.d/gunicorn
   ```
 
-* Create gunicorn app config directory and add our app configuration
+- Create gunicorn app config directory and add our app configuration
 
   ```bash
   sudo mkdir /etc/gunicorn.d/
   sudo cp /opt/alarmdecoder-webapp/contrib/gunicorn.d/alarmdecoder /etc/gunicorn.d/
   ```
 
-* Generate an ssl certificate for the webapp
+- Generate an ssl certificate for the webapp
 
   ```bash
   sudo openssl req -x509 -nodes -sha256 -days 3650 -newkey rsa:4096 -keyout /etc/nginx/ssl/alarmdecoder.key -out /etc/nginx/ssl/alarmdecoder.crt -subj '/CN=AlarmDecoder.local/O=AlarmDecoder.com/C=US'
   ```
 
-* Add nginx service configuration for the webapp
+- Add nginx service configuration for the webapp
 
   ```bash
   sudo cp /opt/alarmdecoder-webapp/contrib/nginx/nginx.service /lib/systemd/system/nginx.service
   ```
 
-* Remove the default site and add the alarmdecoder nginx site configuration and enable it
+- Remove the default site and add the alarmdecoder nginx site configuration and enable it
 
   ```bash
   sudo rm /etc/nginx/sites-enabled/default
@@ -255,7 +255,7 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   sudo ln -s /etc/nginx/sites-available/alarmdecoder /etc/nginx/sites-enabled/
   ```
 
-* Init the AD2Web database as pi user
+- Init the AD2Web database as pi user
 
   ```bash
   cd /opt/alarmdecoder-webapp/ && python manage.py initdbs
