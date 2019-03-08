@@ -98,11 +98,11 @@ You can also look at the [PiBakery](contrib/PiBakery/) recipe for the steps. Thi
   ```
 * Grab the latest master branch of the AlarmDecoder Python API
   ```bash
-  cd /opt && git clone https://github.com/nutechsoftware/alarmdecoder.git
+  cd /opt && sudo git clone https://github.com/nutechsoftware/alarmdecoder.git
   ```
 * Grab the latest master branch of the AlarmDecoder web services app
   ```bash
-  cd /opt/ && git clone https://github.com/nutechsoftware/alarmdecoder-webapp.git
+  cd /opt && sudo git clone https://github.com/nutechsoftware/alarmdecoder-webapp.git
   ```
 * Add Python requirements to the entire system as root
   ```bash
